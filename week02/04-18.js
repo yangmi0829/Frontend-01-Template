@@ -75,10 +75,10 @@ console.log("utf-8 decode:"+decode)
  * 3. 存在双引号时，如果存在单引号需要转义
  */
 console.log("正则校验是否为字符串:")
-// 只存在一种符号
-const regex_string = /^([^']+)|([^"]+)$/
+const regex_string = /^([^']+)|([^"]+)|(([^'])|(\\')*)|(([^"])|(\\")*)$/
 
-
+console.log(regex_string.test('abcde12\'"123"asda""31op'))
+console.log(regex_string.test("abcde12\"'31op"))
 
 
 
