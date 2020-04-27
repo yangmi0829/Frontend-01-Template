@@ -81,4 +81,10 @@ console.log(regex_string.test('abcde12\'"123"asda""31op'))
 console.log(regex_string.test("abcde12\"'31op"))
 
 
+const\u0032=10;
+while(const2--){
+    console.log(const2)
+}
+
+
 
