@@ -35,7 +35,10 @@ function convertNumberToString(number, radix=10) {
 console.log(convertStringToNumber('1111'))
 console.log(convertStringToNumber('ff', 16))
 console.log(convertStringToNumber('-1000.11', 2))
+console.log(convertStringToNumber('10.5', 16))
+console.log(convertStringToNumber('10.1', 15))
 
 console.log(convertNumberToString('1111'))
 console.log(convertNumberToString('ff', 16))
 console.log(convertNumberToString('-1000.11', 2))
+console.log(convertNumberToString('10.5', 16))
