@@ -1,1 +1,38 @@
-# 每周总结可以写在这里
+### Object Type
+-   Attributes of a Named Data Property
+    -   [[Value]]
+    -   [[Writable]]
+    -   [[Enumerable]]
+    -   [[Configurable]]
+-   Attributes of a Named Accessor Property
+    -   [[Enumerable]]
+    -   [[Configurable]]
+    -   [[Get]]
+    -   [[Set]]
+-   Internal Properties Common to All Objects
+    -   [[Prototype]]
+    -   [[Class]]
+    -   [[Extensible]]
+    -   [[Get]]
+    -   [[GetOwnProperty]]
+    -   [[GetProperty]]
+    -   [[Put]]
+    -   [[CanPut]]
+    -   [[HasProperty]]
+    -   [[Delete]]
+    -   [[DefaultValue]]
+    -   [[DefineOwnProperty]]
+-   Internal Properties Only Defined for Some Objects
+    -   [[PrimitiveValue]]
+    -   [[Construct]]
+    -   [[Call]]
+    -   [[HasInstance]]
+    -   [[Scope]]
+    -   [[FormalParameters]]
+    -   [[Code]]
+    -   [[TargetFunction]]
+    -   [[BoundThis]]
+    -   [[BoundArguments]]
+    -   [[Match]]
+    -   [[ParameterMap]]
+    
