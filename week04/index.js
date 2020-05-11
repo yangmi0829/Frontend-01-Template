@@ -53,7 +53,7 @@ list.forEach(item => {
     let obj
     if (item) {
         obj = {
-            id: item.name || item[Symbol.toStringTag],
+            id: item.name || item[Symbol.toStringTag] || 'Reflect',
             object: item,
             children: []
         }
@@ -75,26 +75,3 @@ list.forEach(item => {
     arr.push(obj)
 
 })
-
-
-var set = new Set();
-var objects = list
-objects.forEach(o => set.add(o));
-
-for (var i = 0; i < objects.length; i++) {
-    var o = objects[i]
-    for (var p of Object.getOwnPropertyNames(o)) {
-        var d = Object.getOwnPropertyDescriptor(o, p)
-        if ((d.value !== null && typeof d.value === "object") || (typeof d.value === "function"))
-            if (!set.has(d.value))
-                console.log(d.value)
-        set.add(d.value), objects.push(d.value);
-        /* if (d.get)
-            if (!set.has(d.get))
-                set.add(d.get), objects.push(d.get);
-        if (d.set)
-            if (!set.has(d.set))
-                set.add(d.set), objects.push(d.set); */
-    }
-}
-console.log(set)

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
-<input type="file" accept="video/*" capture="camcorder" />
+    <!-- <input type="file" accept="video/*" capture="camcorder" /> -->
     <div id="container"></div>
     <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-3.4.9/dist/g6.min.js"></script>
     <script src="index.js"></script>
@@ -21,8 +23,7 @@
             width,
             height,
             modes: {
-                default: [
-                    {
+                default: [{
                         type: 'collapse-expand',
                         onChange: function onChange(item, collapsed) {
                             const data = item.get('model').data;
@@ -72,7 +73,7 @@
             },
         });
 
-        graph.node(function(node) {
+        graph.node(function (node) {
             return {
                 label: node.id,
                 labelCfg: {
@@ -87,4 +88,5 @@
         graph.fitView();
     </script>
 </body>
+
 </html>
