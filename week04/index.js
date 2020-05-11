@@ -50,28 +50,26 @@ const list = [
 
 const arr = []
 list.forEach(item => {
-    let obj
-    if (item) {
-        obj = {
-            id: item.name || item[Symbol.toStringTag] || 'Reflect',
-            object: item,
-            children: []
-        }
-        Object.getOwnPropertyNames(item).forEach(name => {
-            obj.children.push({
-                id: `${item.name || item[Symbol.toStringTag]}.${name}`,
-                object: item[name],
-                children: []
-            })
-        })
-
-    } else {
-        obj = {
-            id: String(item),
-            object: item
-        }
+    const obj = {
+        id: item.name || item[Symbol.toStringTag] || 'Reflect',
+        children: []
     }
-
+    Object.getOwnPropertyNames(item).forEach(name => {
+        const descObj = Object.getOwnPropertyDescriptor(obj, name);
+        if (descObj) {
+            ['value', 'get', 'set'].forEach(key => {
+                if (descObj[key]) {
+                    obj.children.push({
+                        id: `${obj.id}.${name}`
+                    })
+                }
+            })
+        } else {
+            obj.children.push({
+                id: `${obj.id}.${name}`
+            })
+        }
+    })
     arr.push(obj)
 
 })
