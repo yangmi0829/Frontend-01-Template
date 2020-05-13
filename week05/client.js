@@ -52,7 +52,8 @@ const req = new Request({
     host: '127.0.0.1',
     port: 3000,
     headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Auth': 'token'
     }
 })
 req.send("aa")
