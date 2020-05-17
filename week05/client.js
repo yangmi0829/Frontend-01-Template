@@ -5,22 +5,32 @@ class Request {
         host = '127.0.0.1',
         port = '80',
         methods = 'GET',
-        headers = {}
+        headers = {},
+        data = {}
     }) {
         this.host = host
         this.port = port
         this.methods = methods
         this.headers = headers
+        this.data = data
+        if (!this.headers['Content-Type'] || methods === 'GET') {
+            this.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+            this.bodyText = Object.keys(this.data).map(key => {
+                return `${encodeURIComponent(key)}=${this.data[key]}\r\n`
+            }).join('&')
+        }
+        if (this.headers['Content-Type'] === 'application/json') {
+            this.bodyText = JSON.stringify(data)
+        }
     }
 
-    send(data) {
-        this.data = data.toString()
+    send() {
         const client = net.createConnection({
             host: this.host,
             port: this.port
         }, () => {
             // 'connect' 监听器
-            console.log('已连接到服务器');
+            console.log('成功连接服务器');
             client.write(this.template)
             /* client.write('POST / HTTP/1.1\r\n')
             client.write('Content-Length: 2\r\n')
@@ -32,8 +42,8 @@ class Request {
             console.log(data.toString());
             client.end();
         });
-        client.on('end', (e) => {
-            console.log('已从服务器断开', e);
+        client.on('end', () => {
+            console.log('已从服务器断开');
         });
         client.on('error', (e) => {
             console.log(e);
@@ -42,9 +52,9 @@ class Request {
 
     get template() {
         const headersStr = Object.keys(this.headers).map(key => {
-            return `${key}: ${this.headers[key]}\r\n`
+            return `${encodeURIComponent(key)}: ${this.headers[key]}\r\n`
         }).join('')
-        return `${this.methods} / HTTP/1.1\r\nContent-Length: ${this.data.length}\r\n${headersStr}\r\n${this.data}\r\n`
+        return `${this.methods} / HTTP/1.1\r\nContent-Length: ${this.bodyText.length}\r\n${headersStr}\r\n${this.bodyText}\r\n`
     }
 }
 
@@ -54,6 +64,9 @@ const req = new Request({
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Auth': 'token'
+    },
+    data: {
+        name: 'zs'
     }
 })
-req.send("aa")
+req.send()
