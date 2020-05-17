@@ -25,29 +25,34 @@ class Request {
     }
 
     send() {
-        const client = net.createConnection({
-            host: this.host,
-            port: this.port
-        }, () => {
-            // 'connect' 监听器
-            console.log('成功连接服务器');
-            client.write(this.template)
-            /* client.write('POST / HTTP/1.1\r\n')
-            client.write('Content-Length: 2\r\n')
-            client.write('Content-Type: application/x-www-form-urlencoded\r\n')
-            client.write('\r\n');
-            client.write('aa\r\n'); */
-        });
-        client.on('data', (data) => {
-            console.log(data.toString());
-            client.end();
-        });
-        client.on('end', () => {
-            console.log('已从服务器断开');
-        });
-        client.on('error', (e) => {
-            console.log(e);
-        });
+        return new Promise((resolve, reject) => {
+            const client = net.createConnection({
+                host: this.host,
+                port: this.port
+            }, () => {
+                // 'connect' 监听器
+                console.log('成功连接服务器');
+                client.write(this.template)
+                /* client.write('POST / HTTP/1.1\r\n')
+                client.write('Content-Length: 2\r\n')
+                client.write('Content-Type: application/x-www-form-urlencoded\r\n')
+                client.write('\r\n');
+                client.write('aa\r\n'); */
+            });
+            client.on('data', (data) => {
+                client.end();
+                // todo 解析响应
+                // statusLine headers
+                resolve(data.toString())
+            });
+            client.on('end', () => {
+                console.log('已从服务器断开');
+            });
+            client.on('error', (e) => {
+                reject(e)
+            });
+        })
+
     }
 
     get template() {
@@ -70,3 +75,37 @@ const req = new Request({
     }
 })
 req.send()
+    .then(res => {
+        console.log('res:', res)
+    })
+
+class Responce {
+
+}
+
+
+class ResponceParse {
+    constructor() {
+
+    }
+
+    receive() {
+
+    }
+
+    receiceChar() {
+
+    }
+}
+
+class TrunkedBodyParser {
+    constructor() {
+
+    }
+    receive() {
+
+    }
+    receiceChar() {
+
+    }
+}
